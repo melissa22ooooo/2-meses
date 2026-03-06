@@ -3,139 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Luis Alberto 🐥</title>
+<title>2 Meses</title>
 
 <style>
 
 body{
 margin:0;
-background:black;
+background:#000;
 overflow:hidden;
-font-family:Arial;
+font-family: 'Segoe UI', sans-serif;
 color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+text-align:center;
 }
 
-/* GALAXIA */
+/* fondo galaxia */
 
-.galaxy{
+body::before{
+content:"";
 position:fixed;
 width:100%;
 height:100%;
-background:radial-gradient(circle at center,#0a0a0a,#000);
-z-index:-1;
+background:
+radial-gradient(white 1px, transparent 1px),
+radial-gradient(white 1px, transparent 1px);
+background-size:50px 50px;
+opacity:0.25;
+animation:stars 40s linear infinite;
 }
+
+@keyframes stars{
+from{transform:translateY(0)}
+to{transform:translateY(-200px)}
+}
+
+/* pantalla */
+
+#start{
+position:absolute;
+font-size:26px;
+cursor:pointer;
+animation:fade 3s infinite;
+}
+
+@keyframes fade{
+0%,100%{opacity:1}
+50%{opacity:0.3}
+}
+
+.scene{
+position:absolute;
+width:90%;
+max-width:400px;
+opacity:0;
+transform:translateY(20px);
+transition:2s;
+font-size:22px;
+}
+
+.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* pollitos */
+
+.chick{
+position:absolute;
+font-size:24px;
+opacity:0;
+animation:appear 2s forwards;
+}
+
+@keyframes appear{
+to{opacity:1}
+}
+
+/* foto */
+
+#photo{
+width:80%;
+border-radius:15px;
+box-shadow:0 0 25px #fff;
+animation:zoom 8s infinite alternate;
+}
+
+@keyframes zoom{
+from{transform:scale(1)}
+to{transform:scale(1.08)}
+}
+
+/* estrellas fugaces */
 
 .star{
 position:absolute;
 width:2px;
-height:2px;
+height:80px;
 background:white;
-border-radius:50%;
-animation:twinkle 3s infinite;
+opacity:0.8;
+transform:rotate(45deg);
+animation:shoot 2s linear infinite;
 }
 
-@keyframes twinkle{
-0%{opacity:0.3}
-50%{opacity:1}
-100%{opacity:0.3}
-}
-
-/* TEXTO CENTRAL */
-
-.text{
-
-position:absolute;
-top:50%;
-left:50%;
-
-transform:translate(-50%,-40%);
-
-font-size:24px;
-
-text-align:center;
-
-padding:20px;
-
-opacity:0;
-
-filter:blur(10px);
-
-transition:all 2.5s ease;
-
-}
-
-/* APARICIÓN BONITA */
-
-.text.show{
-
-opacity:1;
-
-filter:blur(0px);
-
-transform:translate(-50%,-50%);
-
-}
-
-/* FOTO */
-
-.photo{
-
-position:absolute;
-top:50%;
-left:50%;
-
-transform:translate(-50%,-50%) scale(0.5);
-
-opacity:0;
-
-transition:all 4s ease;
-
-}
-
-.photo img{
-
-width:270px;
-
-border-radius:20px;
-
-box-shadow:0 0 40px white;
-
-}
-
-.photo.show{
-
-opacity:1;
-
-transform:translate(-50%,-50%) scale(1);
-
-}
-
-/* BOTÓN INICIO */
-
-#start{
-
-position:absolute;
-
-top:50%;
-
-left:50%;
-
-transform:translate(-50%,-50%);
-
-font-size:28px;
-
-cursor:pointer;
-
-animation:pulse 2s infinite;
-
-}
-
-@keyframes pulse{
-
-0%{opacity:0.4}
-50%{opacity:1}
-100%{opacity:0.4}
-
+@keyframes shoot{
+0%{transform:translate(-100px,-100px) rotate(45deg);opacity:1}
+100%{transform:translate(500px,500px) rotate(45deg);opacity:0}
 }
 
 </style>
@@ -143,134 +118,109 @@ animation:pulse 2s infinite;
 
 <body>
 
-<div class="galaxy" id="galaxy"></div>
-
 <div id="start">✨ Toca para comenzar ✨</div>
 
-<div class="text" id="text"></div>
+<div id="scene1" class="scene">A veces alguien llega a tu vida…<br>sin que lo planees.</div>
 
-<div class="photo" id="photo">
-<img src="nosotros.jpg">
+<div id="scene2" class="scene">Y poco a poco…<br>se vuelve importante.</div>
+
+<div id="scene3" class="scene">Hoy 6 de marzo…<br>ya son <b>2 meses hablando contigo.</b></div>
+
+<div id="scene4" class="scene">Desde el <b>6 de enero</b><br>empezamos a hablar.</div>
+
+<div id="scene5" class="scene">Luis Alberto…<br>mi <b>pio pio</b> 🐥</div>
+
+<div id="scene6" class="scene">Me gusta tu sonrisa,<br>tu sarcasmo,<br>y todo de ti.</div>
+
+<div id="scene7" class="scene">
+<img src="nosotros.jpg" id="photo"><br><br>
+Esta es mi foto favorita.
 </div>
 
-<iframe id="music" width="0" height="0" allow="autoplay"></iframe>
+<div id="scene8" class="scene">Gracias por estos<br><b>2 meses</b> 💫</div>
+
+<iframe id="music"
+width="0"
+height="0"
+src=""
+frameborder="0"
+allow="autoplay">
+</iframe>
 
 <script>
 
-/* CREAR ESTRELLAS */
-
-const galaxy=document.getElementById("galaxy")
-
-for(let i=0;i<220;i++){
-
-let star=document.createElement("div")
-
-star.className="star"
-
-star.style.top=Math.random()*100+"%"
-star.style.left=Math.random()*100+"%"
-
-galaxy.appendChild(star)
-
-}
-
-/* FRASES */
-
-const frases=[
-
-"A alguien muy especial…",
-
-"Luis Alberto",
-
-"Mi pio pio 🐥",
-
-"Un hombre trabajador",
-
-"A quien le gustan las motos 🏍️",
-
-"Con una sonrisa que me encanta",
-
-"Y ese sarcasmo que lo hace único",
-
-"Todo de ti me gusta",
-
-"Eres alguien importante en mi vida",
-
-"No eres una opción…",
-
-"Eres una prioridad"
-
+let scenes=[
+"scene1",
+"scene2",
+"scene3",
+"scene4",
+"scene5",
+"scene6",
+"scene7",
+"scene8"
 ]
 
-const text=document.getElementById("text")
+let i=0
 
-let index=0
+document.getElementById("start").onclick=()=>{
 
-function mostrarFrase(){
+document.getElementById("start").style.display="none"
 
-if(index<frases.length){
+/* música */
 
-text.classList.remove("show")
+document.getElementById("music").src=
+"https://www.youtube.com/embed/aJGWTdueHFY?autoplay=1&loop=1&playlist=aJGWTdueHFY"
 
-setTimeout(()=>{
+/* pollitos corazón */
 
-text.innerText=frases[index]
+let heart=[
+[50,35],[45,30],[55,30],
+[40,40],[60,40],
+[35,50],[65,50],
+[45,60],[55,60],
+[50,70]
+]
 
-text.classList.add("show")
-
-},700)
-
-index++
-
-}
-
-}
-
-/* HISTORIA */
-
-function iniciarHistoria(){
-
-let tiempo=2000
-
-frases.forEach(()=>{
-
-setTimeout(mostrarFrase,tiempo)
-
-tiempo+=4500
-
+heart.forEach((p,index)=>{
+let c=document.createElement("div")
+c.className="chick"
+c.innerHTML="🐥"
+c.style.left=p[0]+"%"
+c.style.top=p[1]+"%"
+c.style.animationDelay=index*0.3+"s"
+document.body.appendChild(c)
 })
 
-/* FOTO FINAL */
+/* estrellas fugaces */
 
-setTimeout(()=>{
+setInterval(()=>{
+let s=document.createElement("div")
+s.className="star"
+s.style.left=Math.random()*100+"%"
+s.style.top=Math.random()*100+"%"
+document.body.appendChild(s)
 
-text.classList.remove("show")
+setTimeout(()=>s.remove(),2000)
 
-let photo=document.getElementById("photo")
+},1500)
 
-photo.classList.add("show")
+/* escenas */
 
-setTimeout(()=>{
-
-text.innerText="6 de enero → 6 de marzo 💫\nDos meses hablando contigo"
-
-text.classList.add("show")
-
-},2000)
-
-},tiempo+2000)
+showScene()
 
 }
 
-/* INICIO */
+function showScene(){
 
-document.getElementById("start").onclick=function(){
+if(i>0)
+document.getElementById(scenes[i-1]).classList.remove("show")
 
-this.style.display="none"
-
-document.getElementById("music").src="https://www.youtube.com/embed/aJGWTdueHFY?autoplay=1&loop=1&playlist=aJGWTdueHFY"
-
-iniciarHistoria()
+if(i<scenes.length){
+let s=document.getElementById(scenes[i])
+s.classList.add("show")
+i++
+setTimeout(showScene,6000)
+}
 
 }
 
