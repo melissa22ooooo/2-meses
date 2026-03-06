@@ -20,25 +20,24 @@ text-align:center;
 overflow:hidden;
 }
 
-/* GALAXIA */
+/* fondo galaxia */
 
 .stars{
 position:fixed;
 width:100%;
 height:100%;
-background:
-radial-gradient(white 1px, transparent 1px);
+background:radial-gradient(white 1px, transparent 1px);
 background-size:35px 35px;
-opacity:0.4;
-animation:moveStars 80s linear infinite;
+opacity:0.35;
+animation:move 80s linear infinite;
 }
 
-@keyframes moveStars{
+@keyframes move{
 from{transform:translateY(0)}
 to{transform:translateY(-400px)}
 }
 
-/* POLLITOS */
+/* pollitos */
 
 .chick{
 position:absolute;
@@ -49,22 +48,21 @@ opacity:0.8;
 
 @keyframes float{
 0%{transform:translateY(0)}
-50%{transform:translateY(-10px)}
+50%{transform:translateY(-12px)}
 100%{transform:translateY(0)}
 }
 
-/* BOTON INICIO */
+/* boton inicio */
 
 #start{
 padding:18px 30px;
 border:2px solid white;
 border-radius:15px;
-background:rgba(0,0,0,0.6);
+background:rgba(0,0,0,0.7);
 font-size:22px;
 cursor:pointer;
 box-shadow:0 0 15px white;
 animation:pulse 2s infinite;
-z-index:5;
 }
 
 @keyframes pulse{
@@ -73,12 +71,12 @@ z-index:5;
 100%{transform:scale(1)}
 }
 
-/* ESCENAS */
+/* escenas */
 
 .scene{
 position:absolute;
 width:85%;
-max-width:400px;
+max-width:420px;
 font-size:24px;
 opacity:0;
 transform:translateY(20px);
@@ -90,7 +88,7 @@ opacity:1;
 transform:translateY(0);
 }
 
-/* FOTO */
+/* foto */
 
 #photo{
 width:85%;
@@ -112,7 +110,7 @@ A veces alguien llega a tu vida...
 </div>
 
 <div id="scene2" class="scene">
-Y poco a poco se vuelve alguien importante.
+Y poco a poco se vuelve alguien muy importante.
 </div>
 
 <div id="scene3" class="scene">
@@ -120,13 +118,13 @@ Hoy quiero recordarte algo especial.
 </div>
 
 <div id="scene4" class="scene">
-Que mañana cumplimos<br>
+Hoy cumplimos<br>
 <b>2 meses hablando.</b>
 </div>
 
 <div id="scene5" class="scene">
 Desde el <b>6 de enero</b><br>
-hasta el <b>6 de marzo</b>.
+hasta hoy <b>6 de marzo</b>.
 </div>
 
 <div id="scene6" class="scene">
@@ -152,19 +150,19 @@ Gracias por estos<br>
 
 <div id="scene10" class="scene">
 Y por hacer mis días<br>
-más bonitos.
+más bonitos. 🐥
 </div>
 
 <iframe
 id="music"
 width="0"
 height="0"
-allow="autoplay"
-></iframe>
+allow="autoplay">
+</iframe>
 
 <script>
 
-/* POLLITOS FLOTANDO */
+/* pollitos */
 
 for(let i=0;i<15;i++){
 
@@ -179,7 +177,7 @@ document.body.appendChild(chick)
 
 }
 
-/* ESCENAS */
+/* escenas */
 
 let scenes=[
 "scene1",
@@ -213,16 +211,11 @@ setTimeout(showScenes,6000)
 
 }
 
-/* INICIO */
-
 document.getElementById("start").addEventListener("click",function(){
 
 this.style.display="none"
 
-/* MUSICA */
-
-document.getElementById("music").src=
-"https://www.youtube.com/embed/aJGWTdueHFY?autoplay=1&loop=1&playlist=aJGWTdueHFY"
+document.getElementById("music").src="https://www.youtube.com/embed/aJGWTdueHFY?autoplay=1&loop=1&playlist=aJGWTdueHFY"
 
 showScenes()
 
