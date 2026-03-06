@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,19 +16,41 @@ font-family:Arial;
 background:black;
 color:white;
 overflow:hidden;
-text-align:center;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
-.pantalla{
+/* estrellas */
+
+.estrellas{
 position:absolute;
 width:100%;
-height:100vh;
+height:100%;
+background:url("https://i.imgur.com/YKY28eT.png");
+animation:mover 60s linear infinite;
+z-index:-2;
+}
+
+@keyframes mover{
+from{background-position:0 0;}
+to{background-position:1000px 1000px;}
+}
+
+/* escenas */
+
+.escena{
+position:absolute;
+width:100%;
+height:100%;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+text-align:center;
 opacity:0;
-transition:1s;
+transition:2s;
 padding:20px;
 box-sizing:border-box;
 }
@@ -35,42 +59,53 @@ box-sizing:border-box;
 opacity:1;
 }
 
+/* texto */
+
 h1{
-font-size:32px;
+font-size:34px;
+animation:latido 2s infinite;
 }
 
 p{
 font-size:20px;
-max-width:300px;
+max-width:320px;
 }
 
+/* latido */
+
+@keyframes latido{
+0%{transform:scale(1)}
+50%{transform:scale(1.08)}
+100%{transform:scale(1)}
+}
+
+/* foto */
+
 img{
-width:80%;
+width:85%;
 max-width:320px;
 border-radius:20px;
-box-shadow:0 0 20px rgba(255,255,255,0.4);
+box-shadow:0 0 40px rgba(255,100,200,0.8);
 }
+
+/* contador */
 
 #contador{
 font-size:22px;
 margin-top:20px;
 }
 
-/* fondo animado */
+/* corazones */
 
-body::before{
-content:"";
+.corazon{
 position:absolute;
-width:200%;
-height:200%;
-background:radial-gradient(circle,#ff4da6,black);
-animation:fondo 10s infinite alternate;
-z-index:-1;
+font-size:22px;
+animation:flotar 6s linear infinite;
 }
 
-@keyframes fondo{
-0%{transform:scale(1);}
-100%{transform:scale(1.3);}
+@keyframes flotar{
+0%{transform:translateY(100vh);opacity:1}
+100%{transform:translateY(-10vh);opacity:0}
 }
 
 iframe{
@@ -78,54 +113,53 @@ display:none;
 }
 
 </style>
+
 </head>
 
-<body onclick="siguiente()">
+<body>
 
-<!-- pantalla 1 -->
+<div class="estrellas"></div>
 
-<div class="pantalla activa">
+<!-- escena 1 -->
+
+<div class="escena activa">
 <h1>💗 Hola 💗</h1>
-<p>Toca la pantalla</p>
+<p>Quería hacer algo especial para ti...</p>
 </div>
 
-<!-- pantalla 2 -->
+<!-- escena 2 -->
 
-<div class="pantalla">
-<h1>Hoy cumplimos</h1>
-<h1>2 meses hablando</h1>
+<div class="escena">
+<h1>💗 Llevamos 2 Meses 💗</h1>
 </div>
 
-<!-- pantalla 3 -->
+<!-- escena 3 -->
 
-<div class="pantalla">
-<p>Tal vez no es mucho tiempo...</p>
+<div class="escena">
+<p>Gracias por estos dos meses de hablar conmigo</p>
 </div>
 
-<!-- pantalla 4 -->
+<!-- escena 4 -->
 
-<div class="pantalla">
-<p>Pero cada momento contigo ha sido especial 💖</p>
-</div>
-
-<!-- pantalla 5 -->
-
-<div class="pantalla">
+<div class="escena">
 <img src="nosotros.jpg">
 </div>
 
-<!-- pantalla 6 -->
+<!-- escena 5 -->
 
-<div class="pantalla">
+<div class="escena">
 <p>Y llevamos...</p>
 <div id="contador"></div>
 </div>
 
-<!-- pantalla final -->
+<!-- escena final -->
 
-<div class="pantalla">
-<h1>💗 Gracias por estos 2 meses 💗</h1>
-<p>Espero que sean muchos más</p>
+<div class="escena">
+<p>
+Tal vez parece poco tiempo...  
+pero para mí significa mucho.  
+Me gusta hablar contigo y conocerte cada día más 💗
+</p>
 </div>
 
 <!-- música -->
@@ -136,24 +170,28 @@ src="https://www.youtube.com/embed/aJGWTdueHFY?autoplay=1&loop=1&playlist=aJGWTd
 
 <script>
 
-let pantalla=0
-const pantallas=document.querySelectorAll(".pantalla")
+/* escenas automáticas */
 
-function siguiente(){
+const escenas=document.querySelectorAll(".escena")
+let actual=0
 
-pantallas[pantalla].classList.remove("activa")
+function cambiar(){
 
-pantalla++
+escenas[actual].classList.remove("activa")
 
-if(pantalla>=pantallas.length) pantalla=pantallas.length-1
+actual++
 
-pantallas[pantalla].classList.add("activa")
+if(actual>=escenas.length) return
+
+escenas[actual].classList.add("activa")
 
 }
 
+setInterval(cambiar,4500)
+
 /* contador */
 
-const inicio = new Date("2026-01-05")
+const inicio=new Date("2026-01-05")
 
 function actualizar(){
 
@@ -165,14 +203,37 @@ const dias=Math.floor(diferencia/(1000*60*60*24))
 const horas=Math.floor((diferencia/(1000*60*60))%24)
 const minutos=Math.floor((diferencia/(1000*60))%60)
 
-document.getElementById("contador").innerHTML =
-dias+" días "+horas+" horas "+minutos+" minutos"
+document.getElementById("contador").innerHTML=
+dias+" días "+horas+" horas "+minutos+" minutos hablando"
 
 }
 
 setInterval(actualizar,1000)
 
+/* corazones */
+
+function corazones(){
+
+const corazon=document.createElement("div")
+
+corazon.classList.add("corazon")
+
+corazon.innerHTML="💖"
+
+corazon.style.left=Math.random()*100+"vw"
+
+document.body.appendChild(corazon)
+
+setTimeout(()=>{
+corazon.remove()
+},6000)
+
+}
+
+setInterval(corazones,500)
+
 </script>
 
 </body>
+
 </html>
