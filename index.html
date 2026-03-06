@@ -22,20 +22,21 @@ justify-content:center;
 align-items:center;
 }
 
-/* estrellas */
+/* fondo estrellas */
 
-.estrellas{
+body::before{
+content:"";
 position:absolute;
-width:100%;
-height:100%;
-background:url("https://i.imgur.com/YKY28eT.png");
-animation:mover 60s linear infinite;
+width:200%;
+height:200%;
+background:radial-gradient(circle,#ff4da6,black);
+animation:fondo 12s infinite alternate;
 z-index:-2;
 }
 
-@keyframes mover{
-from{background-position:0 0;}
-to{background-position:1000px 1000px;}
+@keyframes fondo{
+0%{transform:scale(1)}
+100%{transform:scale(1.4)}
 }
 
 /* escenas */
@@ -51,7 +52,7 @@ align-items:center;
 text-align:center;
 opacity:0;
 transition:2s;
-padding:20px;
+padding:30px;
 box-sizing:border-box;
 }
 
@@ -62,7 +63,7 @@ opacity:1;
 /* texto */
 
 h1{
-font-size:34px;
+font-size:36px;
 animation:latido 2s infinite;
 }
 
@@ -75,7 +76,7 @@ max-width:320px;
 
 @keyframes latido{
 0%{transform:scale(1)}
-50%{transform:scale(1.08)}
+50%{transform:scale(1.1)}
 100%{transform:scale(1)}
 }
 
@@ -85,13 +86,13 @@ img{
 width:85%;
 max-width:320px;
 border-radius:20px;
-box-shadow:0 0 40px rgba(255,100,200,0.8);
+box-shadow:0 0 40px rgba(255,120,200,0.9);
 }
 
 /* contador */
 
 #contador{
-font-size:22px;
+font-size:24px;
 margin-top:20px;
 }
 
@@ -100,10 +101,10 @@ margin-top:20px;
 .corazon{
 position:absolute;
 font-size:22px;
-animation:flotar 6s linear infinite;
+animation:subir 6s linear infinite;
 }
 
-@keyframes flotar{
+@keyframes subir{
 0%{transform:translateY(100vh);opacity:1}
 100%{transform:translateY(-10vh);opacity:0}
 }
@@ -117,8 +118,6 @@ display:none;
 </head>
 
 <body>
-
-<div class="estrellas"></div>
 
 <!-- escena 1 -->
 
@@ -155,11 +154,8 @@ display:none;
 <!-- escena final -->
 
 <div class="escena">
-<p>
-Tal vez parece poco tiempo...  
-pero para mí significa mucho.  
-Me gusta hablar contigo y conocerte cada día más 💗
-</p>
+<h1>💗 Gracias por todo 💗</h1>
+<p>Espero que sean muchos meses más contigo</p>
 </div>
 
 <!-- música -->
@@ -170,12 +166,12 @@ src="https://www.youtube.com/embed/aJGWTdueHFY?autoplay=1&loop=1&playlist=aJGWTd
 
 <script>
 
-/* escenas automáticas */
+/* escenas tipo video */
 
 const escenas=document.querySelectorAll(".escena")
 let actual=0
 
-function cambiar(){
+function siguiente(){
 
 escenas[actual].classList.remove("activa")
 
@@ -187,7 +183,7 @@ escenas[actual].classList.add("activa")
 
 }
 
-setInterval(cambiar,4500)
+setInterval(siguiente,4500)
 
 /* contador */
 
@@ -230,7 +226,7 @@ corazon.remove()
 
 }
 
-setInterval(corazones,500)
+setInterval(corazones,400)
 
 </script>
 
