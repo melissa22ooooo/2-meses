@@ -28,10 +28,6 @@ background:black;
 cursor:pointer;
 }
 
-#inicio h1{
-opacity:.9;
-}
-
 #contenido{
 display:none;
 height:100vh;
@@ -60,16 +56,6 @@ opacity:0;
 transition:2s;
 }
 
-button{
-padding:15px 25px;
-border:none;
-border-radius:25px;
-background:#ff4d6d;
-color:white;
-font-size:16px;
-margin-top:20px;
-}
-
 iframe{
 position:absolute;
 width:0;
@@ -82,7 +68,7 @@ border:0;
 
 <body>
 
-<div id="inicio" onclick="iniciar()">
+<div id="inicio">
 <h1>Toca aquí…<br>hay algo para ti ❤️</h1>
 </div>
 
@@ -93,7 +79,6 @@ border:0;
 <div id="texto"></div>
 
 <iframe
-src=""
 id="musica"
 allow="autoplay">
 </iframe>
@@ -125,6 +110,8 @@ const frases=[
 ];
 
 let i=0;
+
+document.getElementById("inicio").addEventListener("click", iniciar);
 
 function iniciar(){
 
