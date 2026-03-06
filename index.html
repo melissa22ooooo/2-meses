@@ -42,29 +42,37 @@ animation:twinkle 3s infinite;
 
 /* TEXTO CENTRAL */
 
-.centerText{
+.text{
 
 position:absolute;
 top:50%;
 left:50%;
-transform:translate(-50%,-50%);
+
+transform:translate(-50%,-40%);
 
 font-size:24px;
+
 text-align:center;
+
 padding:20px;
 
 opacity:0;
 
-transition:all 2s ease;
+filter:blur(10px);
+
+transition:all 2.5s ease;
 
 }
 
-/* ANIMACION TEXTO */
+/* APARICIÓN BONITA */
 
-.show{
+.text.show{
 
 opacity:1;
-transform:translate(-50%,-55%);
+
+filter:blur(0px);
+
+transform:translate(-50%,-50%);
 
 }
 
@@ -76,7 +84,7 @@ position:absolute;
 top:50%;
 left:50%;
 
-transform:translate(-50%,-50%) scale(0.6);
+transform:translate(-50%,-50%) scale(0.5);
 
 opacity:0;
 
@@ -86,28 +94,32 @@ transition:all 4s ease;
 
 .photo img{
 
-width:260px;
+width:270px;
+
 border-radius:20px;
+
 box-shadow:0 0 40px white;
 
 }
 
-/* FOTO APARECE */
-
 .photo.show{
 
 opacity:1;
+
 transform:translate(-50%,-50%) scale(1);
 
 }
 
-/* BOTON INICIO */
+/* BOTÓN INICIO */
 
 #start{
 
 position:absolute;
+
 top:50%;
+
 left:50%;
+
 transform:translate(-50%,-50%);
 
 font-size:28px;
@@ -121,9 +133,7 @@ animation:pulse 2s infinite;
 @keyframes pulse{
 
 0%{opacity:0.4}
-
 50%{opacity:1}
-
 100%{opacity:0.4}
 
 }
@@ -137,7 +147,7 @@ animation:pulse 2s infinite;
 
 <div id="start">✨ Toca para comenzar ✨</div>
 
-<div class="centerText" id="text"></div>
+<div class="text" id="text"></div>
 
 <div class="photo" id="photo">
 <img src="nosotros.jpg">
@@ -151,7 +161,7 @@ animation:pulse 2s infinite;
 
 const galaxy=document.getElementById("galaxy")
 
-for(let i=0;i<200;i++){
+for(let i=0;i<220;i++){
 
 let star=document.createElement("div")
 
@@ -208,7 +218,7 @@ text.innerText=frases[index]
 
 text.classList.add("show")
 
-},500)
+},700)
 
 index++
 
@@ -226,7 +236,7 @@ frases.forEach(()=>{
 
 setTimeout(mostrarFrase,tiempo)
 
-tiempo+=4000
+tiempo+=4500
 
 })
 
@@ -242,7 +252,7 @@ photo.classList.add("show")
 
 setTimeout(()=>{
 
-text.innerText="Dos meses hablando contigo ✨"
+text.innerText="6 de enero → 6 de marzo 💫\nDos meses hablando contigo"
 
 text.classList.add("show")
 
@@ -258,9 +268,7 @@ document.getElementById("start").onclick=function(){
 
 this.style.display="none"
 
-document.getElementById("music").src=
-
-"https://www.youtube.com/embed/aJGWTdueHFY?autoplay=1&loop=1&playlist=aJGWTdueHFY"
+document.getElementById("music").src="https://www.youtube.com/embed/aJGWTdueHFY?autoplay=1&loop=1&playlist=aJGWTdueHFY"
 
 iniciarHistoria()
 
