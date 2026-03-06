@@ -20,7 +20,7 @@ text-align:center;
 overflow:hidden;
 }
 
-/* fondo galaxia */
+/* galaxia */
 
 .stars{
 position:fixed;
@@ -28,11 +28,11 @@ width:100%;
 height:100%;
 background:radial-gradient(white 1px, transparent 1px);
 background-size:35px 35px;
-opacity:0.35;
-animation:move 80s linear infinite;
+opacity:0.4;
+animation:stars 70s linear infinite;
 }
 
-@keyframes move{
+@keyframes stars{
 from{transform:translateY(0)}
 to{transform:translateY(-400px)}
 }
@@ -43,7 +43,6 @@ to{transform:translateY(-400px)}
 position:absolute;
 font-size:22px;
 animation:float 6s infinite ease-in-out;
-opacity:0.8;
 }
 
 @keyframes float{
@@ -62,13 +61,6 @@ background:rgba(0,0,0,0.7);
 font-size:22px;
 cursor:pointer;
 box-shadow:0 0 15px white;
-animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-0%{transform:scale(1)}
-50%{transform:scale(1.05)}
-100%{transform:scale(1)}
 }
 
 /* escenas */
@@ -79,16 +71,12 @@ width:85%;
 max-width:420px;
 font-size:24px;
 opacity:0;
-transform:translateY(20px);
 transition:2s;
 }
 
 .show{
 opacity:1;
-transform:translateY(0);
 }
-
-/* foto */
 
 #photo{
 width:85%;
@@ -105,21 +93,18 @@ box-shadow:0 0 25px white;
 
 <div id="start">✨ Toca para comenzar ✨</div>
 
-<div id="scene1" class="scene">
+<div id="scene1" class="scene">Cargando...</div>
+
+<div id="scene2" class="scene">
 A veces alguien llega a tu vida...
 </div>
 
-<div id="scene2" class="scene">
+<div id="scene3" class="scene">
 Y poco a poco se vuelve alguien muy importante.
 </div>
 
-<div id="scene3" class="scene">
-Hoy quiero recordarte algo especial.
-</div>
-
 <div id="scene4" class="scene">
-Hoy cumplimos<br>
-<b>2 meses hablando.</b>
+Hoy cumplimos<br><b>2 meses hablando.</b>
 </div>
 
 <div id="scene5" class="scene">
@@ -128,8 +113,7 @@ hasta hoy <b>6 de marzo</b>.
 </div>
 
 <div id="scene6" class="scene">
-Luis Alberto…<br>
-mi <b>pio pio</b> 🐥
+Luis Alberto…<br>mi <b>pio pio</b> 🐥
 </div>
 
 <div id="scene7" class="scene">
@@ -144,27 +128,20 @@ Esta foto es muy especial para mí.
 </div>
 
 <div id="scene9" class="scene">
-Gracias por estos<br>
-<b>2 meses</b>.
+Gracias por estos<br><b>2 meses</b>.
 </div>
 
 <div id="scene10" class="scene">
-Y por hacer mis días<br>
-más bonitos. 🐥
+Y por hacer mis días más bonitos. 🐥
 </div>
 
-<iframe
-id="music"
-width="0"
-height="0"
-allow="autoplay">
-</iframe>
+<iframe id="music" width="0" height="0" allow="autoplay"></iframe>
 
 <script>
 
 /* pollitos */
 
-for(let i=0;i<15;i++){
+for(let i=0;i<12;i++){
 
 let chick=document.createElement("div")
 chick.className="chick"
@@ -176,8 +153,6 @@ chick.style.top=Math.random()*100+"%"
 document.body.appendChild(chick)
 
 }
-
-/* escenas */
 
 let scenes=[
 "scene1",
@@ -194,10 +169,11 @@ let scenes=[
 
 let i=0
 
-function showScenes(){
+function nextScene(){
 
-if(i>0)
+if(i>0){
 document.getElementById(scenes[i-1]).classList.remove("show")
+}
 
 if(i<scenes.length){
 
@@ -205,21 +181,26 @@ document.getElementById(scenes[i]).classList.add("show")
 
 i++
 
-setTimeout(showScenes,6000)
+setTimeout(nextScene,5500)
 
 }
 
 }
 
-document.getElementById("start").addEventListener("click",function(){
+document.getElementById("start").onclick=function(){
 
 this.style.display="none"
 
-document.getElementById("music").src="https://www.youtube.com/embed/aJGWTdueHFY?autoplay=1&loop=1&playlist=aJGWTdueHFY"
+/* iniciar escenas */
 
-showScenes()
+nextScene()
 
-})
+/* música */
+
+document.getElementById("music").src=
+"https://www.youtube.com/embed/aJGWTdueHFY?autoplay=1&loop=1&playlist=aJGWTdueHFY"
+
+}
 
 </script>
 
