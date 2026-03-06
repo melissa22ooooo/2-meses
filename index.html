@@ -18,6 +18,7 @@ align-items:center;
 height:100vh;
 text-align:center;
 overflow:hidden;
+user-select:none;
 }
 
 /* galaxia */
@@ -51,13 +52,25 @@ animation:float 6s infinite ease-in-out;
 100%{transform:translateY(0)}
 }
 
-/* boton inicio */
+/* pantalla inicio */
 
-#start{
+#startScreen{
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:5;
+}
+
+/* boton */
+
+#startBtn{
 padding:18px 30px;
 border:2px solid white;
 border-radius:15px;
-background:rgba(0,0,0,0.7);
+background:rgba(0,0,0,0.8);
 font-size:22px;
 cursor:pointer;
 box-shadow:0 0 15px white;
@@ -91,48 +104,41 @@ box-shadow:0 0 25px white;
 
 <div class="stars"></div>
 
-<div id="start">✨ Toca para comenzar ✨</div>
-
-<div id="scene1" class="scene">Cargando...</div>
-
-<div id="scene2" class="scene">
-A veces alguien llega a tu vida...
+<div id="startScreen">
+<div id="startBtn">✨ Toca para comenzar ✨</div>
 </div>
 
-<div id="scene3" class="scene">
+<div id="scene1" class="scene">A veces alguien llega a tu vida...</div>
+
+<div id="scene2" class="scene">
 Y poco a poco se vuelve alguien muy importante.
 </div>
 
+<div id="scene3" class="scene">
+Hoy cumplimos <b>2 meses hablando</b>.
+</div>
+
 <div id="scene4" class="scene">
-Hoy cumplimos<br><b>2 meses hablando.</b>
+Desde el <b>6 de enero</b> hasta hoy <b>6 de marzo</b>.
 </div>
 
 <div id="scene5" class="scene">
-Desde el <b>6 de enero</b><br>
-hasta hoy <b>6 de marzo</b>.
+Luis Alberto… mi <b>pio pio</b> 🐥
 </div>
 
 <div id="scene6" class="scene">
-Luis Alberto…<br>mi <b>pio pio</b> 🐥
-</div>
-
-<div id="scene7" class="scene">
 Me gusta tu sonrisa,<br>
 tu sarcasmo<br>
 y tu forma de ser.
 </div>
 
-<div id="scene8" class="scene">
+<div id="scene7" class="scene">
 <img src="nosotros.jpg" id="photo"><br><br>
 Esta foto es muy especial para mí.
 </div>
 
-<div id="scene9" class="scene">
-Gracias por estos<br><b>2 meses</b>.
-</div>
-
-<div id="scene10" class="scene">
-Y por hacer mis días más bonitos. 🐥
+<div id="scene8" class="scene">
+Gracias por estos <b>2 meses</b> 🐥
 </div>
 
 <iframe id="music" width="0" height="0" allow="autoplay"></iframe>
@@ -154,6 +160,8 @@ document.body.appendChild(chick)
 
 }
 
+/* escenas */
+
 let scenes=[
 "scene1",
 "scene2",
@@ -162,18 +170,15 @@ let scenes=[
 "scene5",
 "scene6",
 "scene7",
-"scene8",
-"scene9",
-"scene10"
+"scene8"
 ]
 
 let i=0
 
 function nextScene(){
 
-if(i>0){
+if(i>0)
 document.getElementById(scenes[i-1]).classList.remove("show")
-}
 
 if(i<scenes.length){
 
@@ -187,18 +192,16 @@ setTimeout(nextScene,5500)
 
 }
 
-document.getElementById("start").onclick=function(){
+/* inicio */
 
-this.style.display="none"
+document.getElementById("startBtn").onclick=function(){
 
-/* iniciar escenas */
-
-nextScene()
-
-/* música */
+document.getElementById("startScreen").style.display="none"
 
 document.getElementById("music").src=
 "https://www.youtube.com/embed/aJGWTdueHFY?autoplay=1&loop=1&playlist=aJGWTdueHFY"
+
+nextScene()
 
 }
 
