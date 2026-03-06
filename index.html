@@ -2,65 +2,84 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para ti ❤️</title>
+<title>2 Meses 💗</title>
 
 <style>
 
 body{
 margin:0;
-background:linear-gradient(180deg,#0b0b1a,#000);
+font-family:Arial;
+background:linear-gradient(135deg,#ff9ecf,#ffcce6);
 color:white;
-font-family:Georgia,serif;
-overflow:hidden;
 text-align:center;
+overflow:hidden;
 }
 
-#inicio{
-position:fixed;
-width:100%;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-background:black;
-cursor:pointer;
+h1{
+margin-top:40px;
+font-size:40px;
 }
 
-#contenido{
-display:none;
-height:100vh;
-width:100%;
-position:relative;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-padding:20px;
+p{
+font-size:18px;
 }
 
-#foto{
-width:260px;
+img{
+width:280px;
 border-radius:20px;
-box-shadow:0 0 40px rgba(255,255,255,.4);
-opacity:0;
-transition:3s;
-margin-bottom:20px;
+margin-top:20px;
+box-shadow:0 0 20px rgba(0,0,0,0.3);
 }
 
-#texto{
+#contador{
 font-size:22px;
-max-width:80%;
-opacity:0;
-transition:2s;
+margin-top:20px;
+}
+
+/* botón */
+
+button{
+margin-top:25px;
+padding:12px 25px;
+border:none;
+border-radius:20px;
+font-size:16px;
+background:white;
+color:#ff4da6;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+/* carta */
+
+#carta{
+display:none;
+margin:30px;
+background:rgba(255,255,255,0.2);
+padding:20px;
+border-radius:20px;
+}
+
+/* corazones */
+
+.corazon{
+position:fixed;
+top:-10px;
+font-size:24px;
+animation:caer 6s linear infinite;
+}
+
+@keyframes caer{
+0%{transform:translateY(-10px);}
+100%{transform:translateY(110vh);}
 }
 
 iframe{
-position:absolute;
-width:0;
-height:0;
-border:0;
+display:none;
 }
 
 </style>
@@ -68,89 +87,76 @@ border:0;
 
 <body>
 
-<div id="inicio">
-<h1>Toca aquí…<br>hay algo para ti ❤️</h1>
+<h1>💗 Llevamos 2 Meses 💗</h1>
+
+<p>Gracias por estos dos meses de hablar conmigo</p>
+
+<img src="nosotros.jpg">
+
+<div id="contador"></div>
+
+<button onclick="mostrarCarta()">Abrir mensaje 💌</button>
+
+<div id="carta">
+<p>
+Gracias por estos dos meses.  
+Tal vez parece poco tiempo, pero para mí significa mucho.  
+Me gusta hablar contigo, compartir momentos y conocerte cada día más. 💗
+</p>
 </div>
 
-<div id="contenido">
-
-<img src="nosotros.jpg" id="foto">
-
-<div id="texto"></div>
-
-<iframe
-id="musica"
-allow="autoplay">
+<!-- música -->
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/aJGWTdueHFY?autoplay=1&loop=1&playlist=aJGWTdueHFY">
 </iframe>
-
-</div>
 
 <script>
 
-const frases=[
-"Todo empezó el 6 de enero…",
-"Un día que parecía normal.",
-"Pero terminó siendo el inicio de algo muy bonito.",
-"",
-"Desde entonces…",
-"hablar contigo se volvió algo que espero cada día.",
-"",
-"Tu forma de ser…",
-"tu forma de pensar…",
-"y la tranquilidad que transmites…",
-"",
-"simplemente me gustan.",
-"",
-"Hoy es 6 de marzo.",
-"Dos meses desde que empezamos a hablar.",
-"",
-"Y me alegra que haya sido contigo.",
-"",
-"Gracias por existir en mi vida. ❤️"
-];
+/* FECHA DE INICIO (cámbiala si quieres) */
+const inicio = new Date("2026-01-05");
 
-let i=0;
+function actualizar(){
 
-document.getElementById("inicio").addEventListener("click", iniciar);
+const ahora = new Date();
+const diferencia = ahora - inicio;
 
-function iniciar(){
+const dias = Math.floor(diferencia/(1000*60*60*24));
+const horas = Math.floor((diferencia/(1000*60*60))%24);
+const minutos = Math.floor((diferencia/(1000*60))%60);
 
-document.getElementById("inicio").style.display="none";
-document.getElementById("contenido").style.display="flex";
+document.getElementById("contador").innerHTML =
+"⏳ "+dias+" días "+horas+" horas "+minutos+" minutos hablando";
+}
 
-document.getElementById("musica").src=
-"https://www.youtube.com/embed/aJGWTdueHFY?autoplay=1&loop=1&playlist=aJGWTdueHFY";
+setInterval(actualizar,1000);
+
+
+/* carta */
+
+function mostrarCarta(){
+document.getElementById("carta").style.display="block";
+}
+
+
+/* corazones */
+
+function corazones(){
+
+const corazon=document.createElement("div");
+corazon.classList.add("corazon");
+corazon.innerHTML="💖";
+
+corazon.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(corazon);
 
 setTimeout(()=>{
-document.getElementById("foto").style.opacity="1";
-},1000);
-
-mostrar();
+corazon.remove();
+},6000);
 
 }
 
-function mostrar(){
-
-const texto=document.getElementById("texto");
-
-if(i<frases.length){
-
-texto.style.opacity=0;
-
-setTimeout(()=>{
-
-texto.innerHTML=frases[i];
-texto.style.opacity=1;
-
-i++;
-
-setTimeout(mostrar,3000);
-
-},1000);
-
-}
-
-}
+setInterval(corazones,400);
 
 </script>
 
