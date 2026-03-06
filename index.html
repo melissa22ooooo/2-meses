@@ -9,49 +9,62 @@
 
 body{
 margin:0;
-background:#000;
+background:black;
 color:white;
-font-family:Segoe UI;
-overflow:hidden;
+font-family:Arial;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
 text-align:center;
+overflow:hidden;
 }
 
-/* galaxia */
+/* GALAXIA */
 
-body::before{
-content:"";
+.stars{
 position:fixed;
 width:100%;
 height:100%;
 background:
-radial-gradient(white 1px, transparent 1px),
 radial-gradient(white 1px, transparent 1px);
-background-size:40px 40px;
-opacity:0.3;
-animation:stars 60s linear infinite;
+background-size:35px 35px;
+opacity:0.4;
+animation:moveStars 80s linear infinite;
 }
 
-@keyframes stars{
+@keyframes moveStars{
 from{transform:translateY(0)}
-to{transform:translateY(-300px)}
+to{transform:translateY(-400px)}
 }
 
-/* pantalla inicio */
+/* POLLITOS */
 
-#startBox{
+.chick{
 position:absolute;
-padding:20px 35px;
+font-size:22px;
+animation:float 6s infinite ease-in-out;
+opacity:0.8;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+100%{transform:translateY(0)}
+}
+
+/* BOTON INICIO */
+
+#start{
+padding:18px 30px;
 border:2px solid white;
 border-radius:15px;
 background:rgba(0,0,0,0.6);
-font-size:24px;
+font-size:22px;
 cursor:pointer;
-box-shadow:0 0 20px rgba(255,255,255,0.4);
+box-shadow:0 0 15px white;
 animation:pulse 2s infinite;
+z-index:5;
 }
 
 @keyframes pulse{
@@ -60,11 +73,11 @@ animation:pulse 2s infinite;
 100%{transform:scale(1)}
 }
 
-/* escenas */
+/* ESCENAS */
 
 .scene{
 position:absolute;
-width:90%;
+width:85%;
 max-width:400px;
 font-size:24px;
 opacity:0;
@@ -77,47 +90,12 @@ opacity:1;
 transform:translateY(0);
 }
 
-/* pollitos */
-
-.chick{
-position:absolute;
-font-size:24px;
-opacity:0;
-animation:appear 2s forwards;
-}
-
-@keyframes appear{
-to{opacity:1}
-}
-
-/* foto */
+/* FOTO */
 
 #photo{
-width:80%;
+width:85%;
 border-radius:20px;
 box-shadow:0 0 25px white;
-animation:zoom 8s infinite alternate;
-}
-
-@keyframes zoom{
-from{transform:scale(1)}
-to{transform:scale(1.1)}
-}
-
-/* estrellas fugaces */
-
-.star{
-position:absolute;
-width:2px;
-height:80px;
-background:white;
-transform:rotate(45deg);
-animation:shoot 2s linear forwards;
-}
-
-@keyframes shoot{
-0%{transform:translate(-100px,-100px) rotate(45deg);opacity:1}
-100%{transform:translate(500px,500px) rotate(45deg);opacity:0}
 }
 
 </style>
@@ -125,30 +103,30 @@ animation:shoot 2s linear forwards;
 
 <body>
 
-<div id="startBox">✨ Toca para comenzar ✨</div>
+<div class="stars"></div>
+
+<div id="start">✨ Toca para comenzar ✨</div>
 
 <div id="scene1" class="scene">
-A veces alguien llega a tu vida…<br>
-sin que lo planees.
+A veces alguien llega a tu vida...
 </div>
 
 <div id="scene2" class="scene">
-Y poco a poco…<br>
-se vuelve importante.
+Y poco a poco se vuelve alguien importante.
 </div>
 
 <div id="scene3" class="scene">
-Hoy quiero recordarte algo…
+Hoy quiero recordarte algo especial.
 </div>
 
 <div id="scene4" class="scene">
-Que ya llevamos<br>
+Que mañana cumplimos<br>
 <b>2 meses hablando.</b>
 </div>
 
 <div id="scene5" class="scene">
 Desde el <b>6 de enero</b><br>
-hasta hoy <b>6 de marzo</b>.
+hasta el <b>6 de marzo</b>.
 </div>
 
 <div id="scene6" class="scene">
@@ -158,29 +136,50 @@ mi <b>pio pio</b> 🐥
 
 <div id="scene7" class="scene">
 Me gusta tu sonrisa,<br>
-tu sarcasmo,<br>
+tu sarcasmo<br>
 y tu forma de ser.
 </div>
 
 <div id="scene8" class="scene">
 <img src="nosotros.jpg" id="photo"><br><br>
-Esta es mi foto favorita.
+Esta foto es muy especial para mí.
 </div>
 
 <div id="scene9" class="scene">
 Gracias por estos<br>
-<b>2 meses</b> 💫
+<b>2 meses</b>.
+</div>
+
+<div id="scene10" class="scene">
+Y por hacer mis días<br>
+más bonitos.
 </div>
 
 <iframe
 id="music"
 width="0"
 height="0"
-src=""
 allow="autoplay"
 ></iframe>
 
 <script>
+
+/* POLLITOS FLOTANDO */
+
+for(let i=0;i<15;i++){
+
+let chick=document.createElement("div")
+chick.className="chick"
+chick.innerHTML="🐥"
+
+chick.style.left=Math.random()*100+"%"
+chick.style.top=Math.random()*100+"%"
+
+document.body.appendChild(chick)
+
+}
+
+/* ESCENAS */
 
 let scenes=[
 "scene1",
@@ -191,70 +190,43 @@ let scenes=[
 "scene6",
 "scene7",
 "scene8",
-"scene9"
+"scene9",
+"scene10"
 ]
 
 let i=0
 
-document.getElementById("startBox").onclick=()=>{
-
-document.getElementById("startBox").style.display="none"
-
-/* música */
-
-document.getElementById("music").src=
-"https://www.youtube.com/embed/aJGWTdueHFY?autoplay=1&loop=1&playlist=aJGWTdueHFY"
-
-/* pollitos corazón */
-
-let heart=[
-[50,35],[45,30],[55,30],
-[40,40],[60,40],
-[35,50],[65,50],
-[45,60],[55,60],
-[50,70]
-]
-
-heart.forEach((p,index)=>{
-let c=document.createElement("div")
-c.className="chick"
-c.innerHTML="🐥"
-c.style.left=p[0]+"%"
-c.style.top=p[1]+"%"
-c.style.animationDelay=index*0.3+"s"
-document.body.appendChild(c)
-})
-
-/* estrellas fugaces */
-
-setInterval(()=>{
-let s=document.createElement("div")
-s.className="star"
-s.style.left=Math.random()*100+"%"
-s.style.top=Math.random()*100+"%"
-document.body.appendChild(s)
-
-setTimeout(()=>s.remove(),2000)
-
-},2000)
-
-showScene()
-
-}
-
-function showScene(){
+function showScenes(){
 
 if(i>0)
 document.getElementById(scenes[i-1]).classList.remove("show")
 
 if(i<scenes.length){
-let s=document.getElementById(scenes[i])
-s.classList.add("show")
+
+document.getElementById(scenes[i]).classList.add("show")
+
 i++
-setTimeout(showScene,6500)
+
+setTimeout(showScenes,6000)
+
 }
 
 }
+
+/* INICIO */
+
+document.getElementById("start").addEventListener("click",function(){
+
+this.style.display="none"
+
+/* MUSICA */
+
+document.getElementById("music").src=
+"https://www.youtube.com/embed/aJGWTdueHFY?autoplay=1&loop=1&playlist=aJGWTdueHFY"
+
+showScenes()
+
+})
 
 </script>
 
