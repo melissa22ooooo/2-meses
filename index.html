@@ -10,9 +10,9 @@
 body{
 margin:0;
 background:#000;
-overflow:hidden;
-font-family: 'Segoe UI', sans-serif;
 color:white;
+font-family:Segoe UI;
+overflow:hidden;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -20,7 +20,7 @@ height:100vh;
 text-align:center;
 }
 
-/* fondo galaxia */
+/* galaxia */
 
 body::before{
 content:"";
@@ -30,38 +30,46 @@ height:100%;
 background:
 radial-gradient(white 1px, transparent 1px),
 radial-gradient(white 1px, transparent 1px);
-background-size:50px 50px;
-opacity:0.25;
-animation:stars 40s linear infinite;
+background-size:40px 40px;
+opacity:0.3;
+animation:stars 60s linear infinite;
 }
 
 @keyframes stars{
 from{transform:translateY(0)}
-to{transform:translateY(-200px)}
+to{transform:translateY(-300px)}
 }
 
-/* pantalla */
+/* pantalla inicio */
 
-#start{
+#startBox{
 position:absolute;
-font-size:26px;
+padding:20px 35px;
+border:2px solid white;
+border-radius:15px;
+background:rgba(0,0,0,0.6);
+font-size:24px;
 cursor:pointer;
-animation:fade 3s infinite;
+box-shadow:0 0 20px rgba(255,255,255,0.4);
+animation:pulse 2s infinite;
 }
 
-@keyframes fade{
-0%,100%{opacity:1}
-50%{opacity:0.3}
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.05)}
+100%{transform:scale(1)}
 }
+
+/* escenas */
 
 .scene{
 position:absolute;
 width:90%;
 max-width:400px;
+font-size:24px;
 opacity:0;
 transform:translateY(20px);
 transition:2s;
-font-size:22px;
 }
 
 .show{
@@ -86,14 +94,14 @@ to{opacity:1}
 
 #photo{
 width:80%;
-border-radius:15px;
-box-shadow:0 0 25px #fff;
+border-radius:20px;
+box-shadow:0 0 25px white;
 animation:zoom 8s infinite alternate;
 }
 
 @keyframes zoom{
 from{transform:scale(1)}
-to{transform:scale(1.08)}
+to{transform:scale(1.1)}
 }
 
 /* estrellas fugaces */
@@ -103,9 +111,8 @@ position:absolute;
 width:2px;
 height:80px;
 background:white;
-opacity:0.8;
 transform:rotate(45deg);
-animation:shoot 2s linear infinite;
+animation:shoot 2s linear forwards;
 }
 
 @keyframes shoot{
@@ -118,34 +125,60 @@ animation:shoot 2s linear infinite;
 
 <body>
 
-<div id="start">✨ Toca para comenzar ✨</div>
+<div id="startBox">✨ Toca para comenzar ✨</div>
 
-<div id="scene1" class="scene">A veces alguien llega a tu vida…<br>sin que lo planees.</div>
+<div id="scene1" class="scene">
+A veces alguien llega a tu vida…<br>
+sin que lo planees.
+</div>
 
-<div id="scene2" class="scene">Y poco a poco…<br>se vuelve importante.</div>
+<div id="scene2" class="scene">
+Y poco a poco…<br>
+se vuelve importante.
+</div>
 
-<div id="scene3" class="scene">Hoy 6 de marzo…<br>ya son <b>2 meses hablando contigo.</b></div>
+<div id="scene3" class="scene">
+Hoy quiero recordarte algo…
+</div>
 
-<div id="scene4" class="scene">Desde el <b>6 de enero</b><br>empezamos a hablar.</div>
+<div id="scene4" class="scene">
+Que ya llevamos<br>
+<b>2 meses hablando.</b>
+</div>
 
-<div id="scene5" class="scene">Luis Alberto…<br>mi <b>pio pio</b> 🐥</div>
+<div id="scene5" class="scene">
+Desde el <b>6 de enero</b><br>
+hasta hoy <b>6 de marzo</b>.
+</div>
 
-<div id="scene6" class="scene">Me gusta tu sonrisa,<br>tu sarcasmo,<br>y todo de ti.</div>
+<div id="scene6" class="scene">
+Luis Alberto…<br>
+mi <b>pio pio</b> 🐥
+</div>
 
 <div id="scene7" class="scene">
+Me gusta tu sonrisa,<br>
+tu sarcasmo,<br>
+y tu forma de ser.
+</div>
+
+<div id="scene8" class="scene">
 <img src="nosotros.jpg" id="photo"><br><br>
 Esta es mi foto favorita.
 </div>
 
-<div id="scene8" class="scene">Gracias por estos<br><b>2 meses</b> 💫</div>
+<div id="scene9" class="scene">
+Gracias por estos<br>
+<b>2 meses</b> 💫
+</div>
 
-<iframe id="music"
+<iframe
+id="music"
 width="0"
 height="0"
 src=""
-frameborder="0"
-allow="autoplay">
-</iframe>
+allow="autoplay"
+></iframe>
 
 <script>
 
@@ -157,14 +190,15 @@ let scenes=[
 "scene5",
 "scene6",
 "scene7",
-"scene8"
+"scene8",
+"scene9"
 ]
 
 let i=0
 
-document.getElementById("start").onclick=()=>{
+document.getElementById("startBox").onclick=()=>{
 
-document.getElementById("start").style.display="none"
+document.getElementById("startBox").style.display="none"
 
 /* música */
 
@@ -202,9 +236,7 @@ document.body.appendChild(s)
 
 setTimeout(()=>s.remove(),2000)
 
-},1500)
-
-/* escenas */
+},2000)
 
 showScene()
 
@@ -219,7 +251,7 @@ if(i<scenes.length){
 let s=document.getElementById(scenes[i])
 s.classList.add("show")
 i++
-setTimeout(showScene,6000)
+setTimeout(showScene,6500)
 }
 
 }
