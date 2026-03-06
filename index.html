@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para ti ❤️</title>
+
+<style>
+
+body{
+margin:0;
+background:linear-gradient(180deg,#0b0b1a,#000);
+color:white;
+font-family:Georgia,serif;
+overflow:hidden;
+text-align:center;
+}
+
+#inicio{
+position:fixed;
+width:100%;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:black;
+cursor:pointer;
+}
+
+#inicio h1{
+opacity:.9;
+}
+
+#contenido{
+display:none;
+height:100vh;
+width:100%;
+position:relative;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+padding:20px;
+}
+
+#foto{
+width:260px;
+border-radius:20px;
+box-shadow:0 0 40px rgba(255,255,255,.4);
+opacity:0;
+transition:3s;
+margin-bottom:20px;
+}
+
+#texto{
+font-size:22px;
+max-width:80%;
+opacity:0;
+transition:2s;
+}
+
+button{
+padding:15px 25px;
+border:none;
+border-radius:25px;
+background:#ff4d6d;
+color:white;
+font-size:16px;
+margin-top:20px;
+}
+
+iframe{
+position:absolute;
+width:0;
+height:0;
+border:0;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="inicio" onclick="iniciar()">
+<h1>Toca aquí…<br>hay algo para ti ❤️</h1>
+</div>
+
+<div id="contenido">
+
+<img src="nosotros.jpg" id="foto">
+
+<div id="texto"></div>
+
+<iframe
+src=""
+id="musica"
+allow="autoplay">
+</iframe>
+
+</div>
+
+<script>
+
+const frases=[
+"Todo empezó el 6 de enero…",
+"Un día que parecía normal.",
+"Pero terminó siendo el inicio de algo muy bonito.",
+"",
+"Desde entonces…",
+"hablar contigo se volvió algo que espero cada día.",
+"",
+"Tu forma de ser…",
+"tu forma de pensar…",
+"y la tranquilidad que transmites…",
+"",
+"simplemente me gustan.",
+"",
+"Hoy es 6 de marzo.",
+"Dos meses desde que empezamos a hablar.",
+"",
+"Y me alegra que haya sido contigo.",
+"",
+"Gracias por existir en mi vida. ❤️"
+];
+
+let i=0;
+
+function iniciar(){
+
+document.getElementById("inicio").style.display="none";
+document.getElementById("contenido").style.display="flex";
+
+document.getElementById("musica").src=
+"https://www.youtube.com/embed/aJGWTdueHFY?autoplay=1&loop=1&playlist=aJGWTdueHFY";
+
+setTimeout(()=>{
+document.getElementById("foto").style.opacity="1";
+},1000);
+
+mostrar();
+
+}
+
+function mostrar(){
+
+const texto=document.getElementById("texto");
+
+if(i<frases.length){
+
+texto.style.opacity=0;
+
+setTimeout(()=>{
+
+texto.innerHTML=frases[i];
+texto.style.opacity=1;
+
+i++;
+
+setTimeout(mostrar,3000);
+
+},1000);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
